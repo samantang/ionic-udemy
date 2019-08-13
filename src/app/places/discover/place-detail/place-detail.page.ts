@@ -44,5 +44,5 @@ export class PlaceDetailPage implements OnInit {
       }
     });
   }
-
+ 
 }
