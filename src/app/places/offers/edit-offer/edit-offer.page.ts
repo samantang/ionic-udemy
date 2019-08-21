@@ -17,7 +17,7 @@ import { Place } from '../../place.model';
   styleUrls: ['./edit-offer.page.scss']
 })
 export class EditOfferPage implements OnInit, OnDestroy {
-  place: Place = new Place('id', 'leTitre', 'la description', 'imagUrl', 1, null, null, 'userId');
+  place: Place;
   placeId: string;
   form: FormGroup;
   isLoading = false;
