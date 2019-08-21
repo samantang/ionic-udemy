@@ -100,7 +100,7 @@ export class PlacesService {
   getPlace(id: string) {
     return this.http
       .get<PlaceData>(
-        `https://ionic-angular-course-e2f4f.firebaseio.com/offered-places/${id}.json`
+        `https://ionic-angular-course-e2f4f.firebaseio.com/${id}.json`
       )
       .pipe(
         map(placeData => {
@@ -119,20 +119,31 @@ export class PlacesService {
       );
   }
 
+  uploadImage(image: File) {
+    const uploadData = new FormData();
+    uploadData.append('image', image);
+
+    return this.http.post<{imageUrl: string, imagePath: string}>(
+      'https://us-central1-ionic-angular-course.cloudfunctions.net/storeImage',
+      uploadData
+    );
+  }
+
   addPlace(
     title: string,
     description: string,
     price: number,
     dateFrom: Date,
     dateTo: Date,
-    location: PlaceLocation
+    location: PlaceLocation,
+    imageUrl: string
   ) {
     let generatedId: string;
     const newPlace = new Place(
       Math.random().toString(),
       title,
       description,
-      'https://lonelyplanetimages.imgix.net/mastheads/GettyImages-538096543_medium.jpg?sharp=10&vib=20&w=1200',
+      imageUrl,
       price,
       dateFrom,
       dateTo,
